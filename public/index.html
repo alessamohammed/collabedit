@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
 
+<link rel="stylesheet" href="style.css"/>
 
 
 <!-- Firepad -->
@@ -16,7 +17,7 @@
 <script src="https://firepad.io/releases/v1.5.10/firepad.min.js"></script>
 </head>
 <body onload="init()">
-    <div id="firepad"></div>
+    <div id="firepad">
     <script>
       function init() {
         const firebaseConfig = {
@@ -31,7 +32,26 @@
         firebase.initializeApp(firebaseConfig);
   
     }
+
+
+
+
+
+
 </script>
   
+<span class="c1">// Get Firebase Database reference.</span>
+<span class="kd">var</span> <span class="nx">firepadRef</span> <span class="o">=</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">database</span><span class="p">().</span><span class="nx">ref</span><span class="p">();</span>
+
+<span class="c1">// Create CodeMirror (with lineWrapping on).</span>
+<span class="kd">var</span> <span class="nx">codeMirror</span> <span class="o">=</span> <span class="nx">CodeMirror</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">firepad</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span> <span class="na">lineWrapping</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+
+<span class="c1">// Create Firepad (with rich text toolbar and shortcuts enabled).</span>
+<span class="kd">var</span> <span class="nx">firepad</span> <span class="o">=</span> <span class="nx">Firepad</span><span class="p">.</span><span class="nx">fromCodeMirror</span><span class="p">(</span><span class="nx">firepadRef</span><span class="p">,</span> <span class="nx">codeMirror</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">richTextShortcuts</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">richTextToolbar</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">defaultText</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello, World!</span><span class="dl">'</span>
+<span class="p">});</span>
+<span class="p">}</span>
   </body>
 </html>
