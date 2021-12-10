@@ -1,89 +1,146 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<head>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase.js"></script>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/9.6.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.6.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.6.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+<!-- CodeMirror -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+
+<!-- Firepad -->
+<link rel="stylesheet" href="https://firepad.io/releases/v1.5.10/firepad.css" />
+<script src="https://firepad.io/releases/v1.5.10/firepad.min.js"></script>
+
+<style>
+  html { height: 100%; }
+  body { margin: 0; height: 100%; position: relative; }
+    /* Height / width / positioning can be customized for your use case.
+       For demo purposes, we make firepad fill the entire browser. */
+  #firepad-container {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+</head>
+<body onload="init()">
+  <div id="firepad-container"></div>
+
+  <script>
+   
+function init() {
+        const firebaseConfig = {
+      apiKey: "AIzaSyDRooT9uC6Voiq3JXV7Kjz8O-mvoKzAPfw",
+      authDomain: "collab-edit-426.firebaseapp.com",
+      projectId: "collab-edit-426",
+      storageBucket: "collab-edit-426.appspot.com",
+      messagingSenderId: "672605221994",
+      appId: "1:672605221994:web:3ceb3c2c364e7c5c990613",
+      databaseURL: "https://collab-edit-426-default-rtdb.firebaseio.com/"
+    };
+  
+        firebase.initializeApp(firebaseConfig);
+
+      //// Get Firebase Database reference.
+      var firepadRef = getExampleRef();
+
+      //// Create CodeMirror (with lineWrapping on).
+      var codeMirror = CodeMirror(document.getElementById('firepad-container'), { lineWrapping: true });
+
+      //// Create Firepad (with rich text toolbar and shortcuts enabled).
+      var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+          { richTextToolbar: true, richTextShortcuts: true });
+
+      //// Initialize contents.
+      firepad.on('ready', function() {
+        if (firepad.isHistoryEmpty()) {
+          firepad.setHtml(
+              '<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/>\n' +
+              '<br/>' +
+              '<div style="font-size: 18px">' +
+              'Supports:<br/>' +
+              '<ul>' +
+                '<li>Different ' +
+                  '<span style="font-family: impact">fonts,</span>' +
+                  '<span style="font-size: 24px;"> sizes, </span>' +
+                  '<span style="color: blue">and colors.</span>' +
+                '</li>' +
+                '<li>' +
+                  '<b>Bold, </b>' +
+                  '<i>italic, </i>' +
+                  '<u>and underline.</u>' +
+                '</li>' +
+                '<li>Lists' +
+                  '<ol>' +
+                    '<li>One</li>' +
+                    '<li>Two</li>' +
+                  '</ol>' +
+                '</li>' +
+                '<li>Undo / redo</li>' +
+                '<li>Cursor / selection synchronization.</li>' +
+                '<li><checkbox></checkbox> It supports customized entities.</li>' +
+                '<li>And it\'s all fully collaborative!</li>' +
+              '</ul>' +
+              '</div>');
         }
       });
-    </script>
-  </body>
+
+      // An example of a complex custom entity.
+      firepad.registerEntity('checkbox', {
+        render: function (info, entityHandler) {
+          var inputElement = document.createElement('input');
+          inputElement.setAttribute('type', 'checkbox');
+          if(info.checked) {
+            inputElement.checked = 'checked';
+          }
+          inputElement.addEventListener('click', function () {
+            entityHandler.replace({checked:this.checked});
+          });
+          return inputElement;
+        }.bind(this),
+        fromElement: function (element) {
+          var info = {};
+          if(element.hasAttribute('checked')) {
+            info.checked = true;
+          }
+          return info;
+        },
+        update: function (info, element) {
+          if (info.checked) {
+            element.checked = 'checked';
+          } else {
+            element.checked = null;
+          }
+        },
+        export: function (info) {
+          var inputElement = document.createElement('checkbox');
+          if(info.checked) {
+            inputElement.setAttribute('checked', true);
+          }
+          return inputElement;
+        }
+      });
+    }
+
+    // Helper to get hash from end of URL or generate a random one.
+    function getExampleRef() {
+      var ref = firebase.database().ref();
+      var hash = window.location.hash.replace(/#/g, '');
+      if (hash) {
+        ref = ref.child(hash);
+      } else {
+        ref = ref.push(); // generate unique location.
+        window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
+      }
+      if (typeof console !== 'undefined') {
+        console.log('Firebase data: ', ref.toString());
+      }
+      return ref;
+    }
+  </script>
+</body>
 </html>
