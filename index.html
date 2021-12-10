@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase.js"></script>
+
+
+<!-- CodeMirror -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
+
+
+
+<!-- Firepad -->
+<link rel="stylesheet" href="https://firepad.io/releases/v1.5.10/firepad.css" />
+<script src="https://firepad.io/releases/v1.5.10/firepad.min.js"></script>
+</head>
+<body onload="init()">
+    <div id="firepad"></div>
+    <script>
+      function init() {
+        const firebaseConfig = {
+      apiKey: "AIzaSyDRooT9uC6Voiq3JXV7Kjz8O-mvoKzAPfw",
+      authDomain: "collab-edit-426.firebaseapp.com",
+      projectId: "collab-edit-426",
+      storageBucket: "collab-edit-426.appspot.com",
+      messagingSenderId: "672605221994",
+      appId: "1:672605221994:web:3ceb3c2c364e7c5c990613"
+    };
+  
+        firebase.initializeApp(firebaseConfig);
+  
+    }
+</script>
+
+</body>
+</html>
