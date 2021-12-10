@@ -127,7 +127,7 @@ function init() {
 
     // Helper to get hash from end of URL or generate a random one.
     function getExampleRef() {
-      var ref = firebase.database().ref("https://collab-edit-426-default-rtdb.firebaseio.com/");
+      var ref = "https://collab-edit-426-default-rtdb.firebaseio.com/";
       var hash = window.location.hash.replace(/#/g, '');
       if (hash) {
         ref = ref.child(hash);
