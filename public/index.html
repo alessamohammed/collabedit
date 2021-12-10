@@ -39,7 +39,8 @@ function init() {
       projectId: "collab-edit-426",
       storageBucket: "collab-edit-426.appspot.com",
       messagingSenderId: "672605221994",
-      appId: "1:672605221994:web:3ceb3c2c364e7c5c990613"
+      appId: "1:672605221994:web:3ceb3c2c364e7c5c990613",
+      databaseURL: "https://collab-edit-426-default-rtdb.firebaseio.com/"
     };
   
         firebase.initializeApp(firebaseConfig);
@@ -127,7 +128,7 @@ function init() {
 
     // Helper to get hash from end of URL or generate a random one.
     function getExampleRef() {
-      var ref = "https://collab-edit-426-default-rtdb.firebaseio.com/";
+      var ref = firebase.database().ref();
       var hash = window.location.hash.replace(/#/g, '');
       if (hash) {
         ref = ref.child(hash);
